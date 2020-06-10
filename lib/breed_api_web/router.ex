@@ -7,5 +7,9 @@ defmodule BreedApiWeb.Router do
 
   scope "/api", BreedApiWeb do
     pipe_through :api
+
+    resources("/breeds", BreedController, only: [:index, :show])
+    resources("/favorites", FavoriteController, only: [:index, :show, :delete])
+    post("/favorites/add", FavoriteController, :create)
   end
 end
