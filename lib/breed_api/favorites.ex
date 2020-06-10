@@ -1,15 +1,26 @@
 defmodule BreedApi.Favorites do
+  import Ecto.Query
+
   alias BreedApi.{
     Repo,
     Favorite
   }
 
   def all() do
-    Repo.all(Favorite)
+    from(
+      f in Favorite,
+      preload: :breed
+    )
+    |> Repo.all()
   end
 
   def get(id) do
-    Repo.get(Favorite, id)
+    from(
+      f in Favorite,
+      where: f.id == ^id,
+      preload: :breed
+    )
+    |> Repo.one()
   end
 
   def delete(id) do
