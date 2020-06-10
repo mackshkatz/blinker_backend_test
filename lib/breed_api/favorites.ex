@@ -15,7 +15,7 @@ defmodule BreedApi.Favorites do
   def delete(id) do
     id
     |> get()
-    |>  Repo.delete()
+    |> Repo.delete()
   end
 
   def create(attrs \\ %{}) do

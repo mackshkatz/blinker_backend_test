@@ -16,7 +16,7 @@ defmodule BreedApiWeb.FavoriteController do
   end
 
   def create(conn, params) do
-    {:ok, favorite} = Favorites.create(params)
+    {:ok, _favorite} = Favorites.create(params)
 
     conn
     |> put_status(:no_content)
