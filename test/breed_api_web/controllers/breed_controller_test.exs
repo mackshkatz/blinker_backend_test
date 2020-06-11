@@ -1,14 +1,14 @@
 defmodule BreedApiWeb.BreedControllerTest do
   use BreedApiWeb.ConnCase
 
-  describe "GET /api/breeds" do
+  describe "GET /breeds" do
     test "returns list of breeds" do
       insert_list(2, :breed)
 
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> get("/api/breeds")
+        |> get("/breeds")
 
       assert [
                %{
@@ -29,14 +29,14 @@ defmodule BreedApiWeb.BreedControllerTest do
     end
   end
 
-  describe "GET /api/breeds/:id" do
+  describe "GET /breeds/:id" do
     test "returns specified breed" do
       breed_id = insert(:breed).id
 
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> get("/api/breeds/#{breed_id}")
+        |> get("/breeds/#{breed_id}")
 
       assert %{
                "id" => ^breed_id,

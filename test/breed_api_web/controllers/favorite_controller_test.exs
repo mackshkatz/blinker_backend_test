@@ -3,14 +3,14 @@ defmodule BreedApiWeb.FavoriteControllerTest do
   alias BreedApi.Repo
   require Ecto.Query
 
-  describe "GET /api/favorites" do
+  describe "GET /favorites" do
     test "returns list of favorites" do
       insert_list(2, :favorite)
 
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> get("/api/favorites")
+        |> get("/favorites")
 
       assert [
                %{
@@ -35,14 +35,14 @@ defmodule BreedApiWeb.FavoriteControllerTest do
     end
   end
 
-  describe "GET /api/favorites/:id" do
+  describe "GET /favorites/:id" do
     test "returns specified favorite" do
       favorite_id = insert(:favorite).id
 
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> get("/api/favorites/#{favorite_id}")
+        |> get("/favorites/#{favorite_id}")
 
       assert %{
                "id" => ^favorite_id,
@@ -56,14 +56,14 @@ defmodule BreedApiWeb.FavoriteControllerTest do
     end
   end
 
-  describe "POST /api/favorites/add" do
+  describe "POST /favorites/add" do
     test "returns :no_content" do
       breed_id = insert(:breed).id
 
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> post("/api/favorites/add", %{breed_id: breed_id})
+        |> post("/favorites/add", %{breed_id: breed_id})
 
       assert response(conn, 204)
     end
@@ -72,7 +72,7 @@ defmodule BreedApiWeb.FavoriteControllerTest do
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> post("/api/favorites/add", %{breed_id: 0})
+        |> post("/favorites/add", %{breed_id: 0})
 
       assert %{
                "errors" => %{
@@ -89,20 +89,20 @@ defmodule BreedApiWeb.FavoriteControllerTest do
 
       build_conn()
       |> put_req_header("content-type", "application/json")
-      |> post("/api/favorites/add", %{breed_id: breed_id})
+      |> post("/favorites/add", %{breed_id: breed_id})
 
       assert Repo.aggregate(query, :count, :id) == 1
     end
   end
 
-  describe "DELETE /api/favorites/:id" do
+  describe "DELETE /favorites/:id" do
     test "returns :no_content" do
       favorite = insert(:favorite)
 
       conn =
         build_conn()
         |> put_req_header("content-type", "application/json")
-        |> delete("/api/favorites/#{favorite.id}")
+        |> delete("/favorites/#{favorite.id}")
 
       assert response(conn, 204)
     end
@@ -115,7 +115,7 @@ defmodule BreedApiWeb.FavoriteControllerTest do
 
       build_conn()
       |> put_req_header("content-type", "application/json")
-      |> delete("/api/favorites/#{favorite.id}")
+      |> delete("/favorites/#{favorite.id}")
 
       assert Repo.aggregate(query, :count, :id) == 0
     end

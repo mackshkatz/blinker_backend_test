@@ -5,7 +5,7 @@ defmodule BreedApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", BreedApiWeb do
+  scope "/", BreedApiWeb do
     pipe_through :api
 
     resources("/breeds", BreedController, only: [:index, :show])
