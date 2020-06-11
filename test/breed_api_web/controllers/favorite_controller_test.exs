@@ -68,6 +68,19 @@ defmodule BreedApiWeb.FavoriteControllerTest do
       assert response(conn, 204)
     end
 
+    test "returns proper errors for invalid params" do
+      conn =
+        build_conn()
+        |> put_req_header("content-type", "application/json")
+        |> post("/api/favorites/add", %{breed_id: 0})
+
+      assert %{
+               "errors" => %{
+                 "breed" => ["does not exist"]
+               }
+             } = json_response(conn, 422)
+    end
+
     test "adds a breed to the favorites list" do
       breed_id = insert(:breed).id
       query = Ecto.Query.from(f in BreedApi.Favorite)
