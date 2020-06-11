@@ -22,6 +22,7 @@ defmodule BreedApiWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias BreedApiWeb.Router.Helpers, as: Routes
+      import BreedApi.Factory
 
       # The default endpoint for testing
       @endpoint BreedApiWeb.Endpoint

@@ -40,7 +40,9 @@ defmodule BreedApi.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:faker, "~> 0.12", only: :test},
+      {:ex_machina, "~> 2.4", only: :test}
     ]
   end
 

@@ -19,13 +19,13 @@ defmodule BreedApiWeb.FavoriteController do
     {:ok, _favorite} = Favorites.create(params)
 
     conn
-    |> put_status(:no_content)
+    |> send_resp(204, "")
   end
 
   def delete(conn, %{"id" => id}) do
     {:ok, _favorite} = Favorites.delete(id)
 
     conn
-    |> put_status(:no_content)
+    |> send_resp(204, "")
   end
 end
